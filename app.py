@@ -1,32 +1,128 @@
 import streamlit as st
 
+# ---------------- Page Config ---------------- #
+
 st.set_page_config(
-    page_title="Job Connect AI",
-    page_icon="🤖",
+    page_title="JobConnect AI",
+    page_icon="💼",
     layout="wide"
 )
 
-st.title("🤖 Job Connect AI")
+# ---------------- Load CSS ---------------- #
 
-st.subheader("AI Powered Career Assistant")
+def load_css():
+    with open("assets/style.css") as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-st.write("""
-Welcome to **Job Connect AI** 🚀
+load_css()
 
-This platform helps job seekers to:
+# ---------------- Layout ---------------- #
 
-✅ Upload Resume
+left, right = st.columns([1, 1], gap="Medium")
 
-✅ Get ATS Score
+# ================= LEFT ================= #
 
-✅ Search Jobs
+with left:
 
-✅ AI Career Guidance
+    st.markdown(
+        """
+        <div class="hero-title">
+            💼 JobConnect AI
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
-✅ Company Information
+    st.markdown(
+        """
+        <div class="hero-subtitle">
+            Your AI Career Partner
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
-✅ Smart Job Recommendations
-""")
+    st.markdown(
+        """
+        <div class="hero-text">
+        Find your dream job with Artificial Intelligence.<br>
+        Upload your resume, analyze your skills,
+        search live jobs and receive AI-powered
+        career guidance.
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
-if st.button("🚀 Get Started"):
-    st.success("Welcome to Job Connect AI")
+    features = [
+        ("🤖", "AI Career Assistant"),
+        ("📄", "Resume Analysis"),
+        ("💼", "Live Job Search"),
+        ("🎯", "Resume Match Score"),
+    ]
+
+    for icon, title in features:
+        st.markdown(
+            f"""
+            <div class="feature-card">
+                <h4>{icon} {title}</h4>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+# ================= RIGHT ================= #
+
+with right:
+
+    st.markdown("<br><br>", unsafe_allow_html=True)
+
+    st.markdown(
+        """
+        <div class="right-card">
+
+        <h5>Welcome Back 👋</h5>
+
+        <p>
+        Login or create an account
+        to continue your AI career journey.
+        </p>
+
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    st.write("")
+
+    if st.button("🔐 Login", use_container_width=True):
+        st.switch_page("pages/login.py")
+
+    st.write("")
+
+    if st.button("📝 Register", use_container_width=True):
+        st.switch_page("pages/register.py")
+
+    st.markdown(
+        """
+        <div style="text-align:center;
+                    color:#64748B;
+                    margin-top:18px;">
+        Secure • Fast • AI Powered
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+# ---------------- Footer ---------------- #
+
+st.markdown("<br><hr>", unsafe_allow_html=True)
+
+st.markdown(
+    """
+    <div class="footer">
+    © 2026 JobConnect AI | AI Powered Career Platform
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
