@@ -9,6 +9,7 @@ from utils.resume_parser import (
 
 from utils.career_analysis import analyze_resume
 
+
 # ------------------ Page Config ------------------
 
 st.set_page_config(
@@ -80,78 +81,75 @@ if uploaded_file is not None:
     score = calculate_resume_score(found_skills)
 
 
-    # ------------------ AI Career Analysis ------------------
+    # ------------------ AI Career Analysis ----------------
 
-career_data = {
-    "job_roles": [],
-    "missing_skills": []
-}
+    career_data = {
+        "job_roles": [],
+        "missing_skills": []
+    }
 
-with st.spinner("🤖 Analyzing your career profile..."):
-
-    try:
-        print("DEBUG resume_text type:", type(resume_text))
-        print("DEBUG resume_text length:", len(resume_text))
-
-        career_data = analyze_resume(resume_text)
-
-        print("DEBUG career_data:", career_data)
-
-    except Exception as e:
-        print("Career Analysis Error:", repr(e))
-
-
-job_roles = career_data.get("job_roles", [])
-ai_missing_skills = career_data.get("missing_skills", [])
-
-print("ALL JOB ROLES:", job_roles)
-print("TOTAL JOB ROLES:", len(job_roles))
-
-# ------------------ Live Jobs ------------------
-
-jobs = []
-
-if job_roles:
-
-    with st.spinner("🔍 Searching Live Jobs..."):
+    with st.spinner("🤖 Analyzing your career profile..."):
 
         try:
-
-            all_jobs = []
-
-            for role in job_roles:
-
-                role_jobs = search_jobs(role)
-
-
-                if role_jobs:
-                    all_jobs.extend(role_jobs)
-
-            # Remove duplicate jobs
-            seen_jobs = set()
-
-            for job in all_jobs:
-
-                if not isinstance(job, dict):
-                    continue
-
-                job_id = (
-                    job.get("job_id")
-                    or job.get("job_apply_link")
-                    or job.get("job_google_link")
-                    or job.get("job_title")
-                )
-
-                if job_id and job_id not in seen_jobs:
-
-                    seen_jobs.add(job_id)
-                    jobs.append(job)
+            career_data = analyze_resume(resume_text)
 
         except Exception as e:
+            st.error("⚠️ Career analysis is currently unavailable. Please try again.")
 
-            print("Job Search Error:", e)
 
-            jobs = []
+    job_roles = career_data.get("job_roles", [])
+    ai_missing_skills = career_data.get("missing_skills", [])
+
+
+    # ------------------ Live Jobs ------------------
+
+    jobs = []
+
+    if job_roles:
+
+        with st.spinner("🔍 Searching Live Jobs..."):
+
+            try:
+
+                all_jobs = []
+
+                for role in job_roles:
+
+                    role_jobs = search_jobs(role)
+
+                    if role_jobs:
+                        all_jobs.extend(role_jobs)
+
+
+                # Remove duplicate jobs
+
+                seen_jobs = set()
+
+                for job in all_jobs:
+
+                    if not isinstance(job, dict):
+                        continue
+
+                    job_id = (
+                        job.get("job_id")
+                        or job.get("job_apply_link")
+                        or job.get("job_google_link")
+                        or job.get("job_title")
+                    )
+
+                    if job_id and job_id not in seen_jobs:
+
+                        seen_jobs.add(job_id)
+                        jobs.append(job)
+
+
+            except Exception as e:
+                st.warning(
+                    "⚠️ Live job search is temporarily unavailable. "
+                    "Your resume analysis is still available."
+                )
+                jobs = []
+
     # ---------------- Dashboard Cards ----------------
 
     st.subheader("📊 Dashboard")
@@ -210,6 +208,7 @@ if job_roles:
 
     st.divider()
 
+
     # ---------------- Suggested Skills ----------------
 
     st.subheader("📚 Suggested Skills")
@@ -251,10 +250,11 @@ if job_roles:
 
 
     st.divider()
+
+
     # ---------------- Live Job Recommendations ----------------
 
     st.subheader("💼 Live Job Recommendations")
-
 
     if jobs:
 
