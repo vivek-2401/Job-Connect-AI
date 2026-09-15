@@ -113,8 +113,11 @@ with right:
             cursor = conn.cursor()
 
             cursor.execute(
-                "INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
-                (name, email, password)
+                """
+                INSERT INTO users (name, email, password, role)
+                VALUES (?, ?, ?, ?)
+                """,
+                (name, email, password, "user")
             )
 
             conn.commit()

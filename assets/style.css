@@ -297,3 +297,66 @@ p {
   background: #1d4ed8 !important;
   color: white !important;
 }
+
+/* ==========================================
+   ADMIN DASHBOARD
+========================================== */
+
+.admin-header {
+  background: #ffffff;
+  padding: 28px 32px;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+  margin-bottom: 25px;
+}
+
+.admin-header h1 {
+  margin: 0;
+  color: #1e293b;
+  font-size: 36px;
+}
+
+.admin-header p {
+  margin-top: 8px;
+  margin-bottom: 0;
+  color: #64748b;
+}
+
+.admin-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 22px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+}
+
+.admin-card-title {
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.admin-card-value {
+  color: #1e293b;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.admin-section {
+  color: #1e293b;
+  font-size: 24px;
+  font-weight: 700;
+  margin-top: 10px;
+  margin-bottom: 18px;
+}
+
+.admin-table-wrapper {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 8px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+}
