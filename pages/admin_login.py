@@ -1,7 +1,7 @@
 import streamlit as st
 import sqlite3
 import os
-
+import database
 
 # -----------------------------
 # Database Path
