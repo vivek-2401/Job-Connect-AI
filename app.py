@@ -103,6 +103,11 @@ with right:
     if st.button("📝 Register", use_container_width=True):
         st.switch_page("pages/register.py")
 
+    st.write("")
+
+    if st.button("👑 Admin Login", use_container_width=True):
+        st.switch_page("pages/admin_login.py")
+
     st.markdown(
         """
         <div style="text-align:center;

@@ -367,4 +367,4 @@ with st.sidebar:
 
         del st.session_state["user"]
 
-        st.switch_page("pages/login.py")
+        st.switch_page("app.py")

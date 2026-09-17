@@ -3,16 +3,16 @@ import sqlite3
 import os
 import pandas as pd
 
-
-
-
-
 # -----------------------------
 # Database Path
 # -----------------------------
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-DB_PATH = os.path.join(BASE_DIR, "users.db")
+BASE_DIR = os.path.dirname(
+    os.path.dirname(
+        os.path.abspath(__file__)
+    )
+)
 
+DB_PATH = os.path.join(BASE_DIR, "users.db")
 # -----------------------------
 # Load Global CSS
 # -----------------------------
@@ -38,7 +38,6 @@ st.set_page_config(
     page_icon="🛡️",
     layout="wide"
 )
-
 
 # -----------------------------
 # Admin Access Protection
@@ -107,8 +106,7 @@ st.markdown(
 if st.button("Logout"):
     st.session_state.admin_logged_in = False
     st.session_state.admin_data = None
-
-    st.rerun()
+    st.switch_page("app.py")
 
 st.divider()
 
